@@ -16,6 +16,7 @@ namespace wheel{
 #define LOG_WARN(msg) wheel::Logger::GetInstance().Log(wheel::Level::WARN, __FILE__, __LINE__, msg)
 #define LOG_ERROR(msg) wheel::Logger::GetInstance().Log(wheel::Level::ERROR, __FILE__, __LINE__, msg)
 #define LOG_FATAL(msg) wheel::Logger::GetInstance().Log(wheel::Level::FATAL, __FILE__, __LINE__, msg)
+#define SET_LOG_LEVEL(level) wheel::Logger::GetInstance().SetLevel(level);
 
 enum class Level
 {
@@ -31,6 +32,7 @@ class Logger
 public:
     
     void Log(Level level, const std::string& file, int line, const std::string& message);
+    void SetLevel(Level level);
 
 private:
     void OpenFile();
@@ -57,6 +59,7 @@ private:
 private:
     std::string m_filename;
     std::ofstream m_fout;
+    Level m_currLevel;
     size_t m_max_size;
 };
 
