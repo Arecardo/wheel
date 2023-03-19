@@ -2,8 +2,8 @@
 using namespace wheel;
 using namespace std::chrono;
 
-Logger::Logger(Level level, const std::string& filename, size_t max_size):
-    m_level(level), m_filename(filename), m_max_size(max_size)
+Logger::Logger(const std::string& filename, size_t max_size):
+    m_filename(filename), m_max_size(max_size)
 {
 
 }
