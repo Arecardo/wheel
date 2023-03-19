@@ -3,7 +3,7 @@ using namespace wheel;
 using namespace std::chrono;
 
 Logger::Logger(const std::string& filename, size_t max_size):
-    m_filename(filename), m_max_size(max_size)
+    m_filename(filename), m_max_size(max_size), m_currLevel(Level::INFO)
 {
 
 }
@@ -74,6 +74,11 @@ std::string Logger::Now()
 
 void Logger::Log(Level level, const std::string& file, int line, const std::string& message)
 {
+    if (level < m_currLevel)
+    {
+        return;
+    }
+
     if (m_fout.is_open() && m_fout.tellp() >= m_max_size)
     {
         ReopenFile();
@@ -90,4 +95,9 @@ void Logger::Log(Level level, const std::string& file, int line, const std::stri
     oss << "[" << curr_time.c_str() << "]" << "[" << LevelToStr(level) << "]" << "[" << file << ":" << line << "]" << message << std::endl;
     m_fout << oss.str();
     m_fout.flush();
+}
+
+void Logger::SetLevel(Level level)
+{
+    m_currLevel = level;
 }
