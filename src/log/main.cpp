@@ -5,7 +5,10 @@ using namespace std;
 
 int main()
 {
-    wheel::Logger::GetInstance().open("./test.log");
-    wheel::Logger::GetInstance().Log(wheel::Logger::DEBUG, __FILE__, __LINE__, "Hello world");
+    wheel::Logger my_logger(wheel::Level::INFO, "test.log", 1000000);
+    while (true)
+    { 
+        my_logger.Log(wheel::Level::INFO, __FILE__, __LINE__, "This is a message");
+    }
     return 0;
 }
