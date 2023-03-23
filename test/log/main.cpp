@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-#include "Logger.h"
+#include "../../src/log/Logger.h"
 
 int main()
 {
